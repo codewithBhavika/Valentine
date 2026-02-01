@@ -23,6 +23,7 @@
     text-align: center;
     padding: 28px;
     width: 90%;
+    max-width: 380px;
     background: rgba(255,255,255,0.95);
     border-radius: 26px;
     box-shadow: 0 18px 40px rgba(0,0,0,0.12);
@@ -30,9 +31,10 @@
     z-index: 5;
   }
 
-  img {
+  .container img {
     width: 140px;
-    margin-bottom: 14px;
+    display: block;
+    margin: 0 auto 14px auto;
   }
 
   h1 {
@@ -43,10 +45,17 @@
     font-weight: 400;
   }
 
+  p {
+    color: #ff3366;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
   .buttons {
     position: relative;
-    height: 140px;
-    margin-top: 20px;
+    height: 150px;
+    margin-top: 22px;
   }
 
   button {
@@ -58,7 +67,6 @@
     position: absolute;
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
-    transition: 0.15s ease;
   }
 
   #yesBtn {
@@ -66,14 +74,15 @@
     color: white;
     left: 50%;
     transform: translateX(-50%);
+    top: 0;
   }
 
   #noBtn {
     background: #eee;
     color: #444;
-    top: 80px;
     left: 50%;
     transform: translateX(-50%);
+    top: 80px;
   }
 
   /* Floating hearts */
@@ -96,7 +105,7 @@
     top: 50%;
     left: 50%;
     z-index: 9999;
-    animation: burst 2.6s ease-out forwards;
+    animation: burst 2.8s ease-out forwards;
   }
 
   @keyframes burst {
@@ -123,7 +132,7 @@
 
 <div class="container" id="card">
 
-  <!-- Teddy ABOVE question -->
+  <!-- FIRST PAGE -->
   <img src="Bear1.gif" alt="cute bear">
 
   <h1>Will you be my Valentine? 💖</h1>
@@ -141,41 +150,48 @@
 <script>
   function moveNo() {
     const noBtn = document.getElementById("noBtn");
-    const container = document.querySelector(".container");
+    const box = document.querySelector(".buttons");
 
-    const maxX = container.offsetWidth - noBtn.offsetWidth;
-    const maxY = container.offsetHeight - noBtn.offsetHeight;
+    const padding = 10;
+    const maxX = box.clientWidth - noBtn.offsetWidth - padding;
+    const maxY = box.clientHeight - noBtn.offsetHeight - padding;
 
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.transform = "none";
   }
 
   function launchConfetti() {
     const colors = ["#ff3366","#ffcc00","#66ccff","#99ffcc","#ff99cc"];
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 90; i++) {
       const c = document.createElement("div");
       c.className = "confetti";
       c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
       c.style.setProperty("--x", (Math.random() * 600 - 300) + "px");
       c.style.setProperty("--y", (Math.random() * 600 - 300) + "px");
       document.body.appendChild(c);
-      setTimeout(() => c.remove(), 2600);
+      setTimeout(() => c.remove(), 2800);
     }
   }
 
   function yesClicked() {
     launchConfetti();
-    document.getElementById("bgMusic").play();
-
     document.getElementById("card").innerHTML = `
-      
-      <h1>YES 💖</h1>
-      <p style="color:#ff3366;font-size:16px;font-weight:500;">
-      <img src="Bear2.gif" alt="happy bear">
-        
-        Happy Valentine’s Day 💕
-      </p>
-    `;
+  <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+
+    <h1>YES 💖</h1>
+
+    <img src="Bear2.gif" alt="happy bear" style="width:140px;">
+
+    <p>
+      Happy Valentine’s Day 💕
+    </p>
+
+  </div>
+`;
   }
 </script>
 
