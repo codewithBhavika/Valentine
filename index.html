@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💖</title>
 
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -31,10 +32,9 @@
     z-index: 5;
   }
 
-  .container img {
+  img {
     width: 140px;
-    display: block;
-    margin: 0 auto 14px auto;
+    margin-bottom: 14px;
   }
 
   h1 {
@@ -119,6 +119,7 @@
 
 <body>
 
+<!-- Floating hearts -->
 <script>
   setInterval(() => {
     const heart = document.createElement("div");
@@ -132,17 +133,19 @@
 
 <div class="container" id="card">
 
-  <!-- FIRST PAGE -->
+  <!-- FIRST SCREEN -->
   <img src="Bear1.gif" alt="cute bear">
 
-  <h1>Will you be my Valentine Naveen? 💖</h1>
+  <h1>Will you be my Valentine? 💖</h1>
 
   <div class="buttons">
     <button id="yesBtn" onclick="yesClicked()">Yes 💕</button>
     <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">No 🙃</button>
   </div>
+
 </div>
 
+<!-- Background Music -->
 <audio id="bgMusic" loop preload="auto" playsinline>
   <source src="innerbloom.mp3" type="audio/mpeg">
 </audio>
@@ -156,11 +159,8 @@
     const maxX = box.clientWidth - noBtn.offsetWidth - padding;
     const maxY = box.clientHeight - noBtn.offsetHeight - padding;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
     noBtn.style.transform = "none";
   }
 
@@ -178,20 +178,19 @@
   }
 
   function yesClicked() {
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.7;
+    music.play().catch(() => {});
+
     launchConfetti();
+
     document.getElementById("card").innerHTML = `
-  <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
-
-    <h1>YES 💖</h1>
-
-    <img src="Bear2.gif" alt="happy bear" style="width:140px;">
-
-    <p>
-      Happy Valentine’s Day 💕
-    </p>
-
-  </div>
-`;
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+        <h1>YES 💖</h1>
+        <img src="Bear2.gif" alt="happy bear">
+        <p>Happy Valentine’s Day 💕</p>
+      </div>
+    `;
   }
 </script>
 
