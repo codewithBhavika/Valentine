@@ -10,7 +10,7 @@
     margin: 0;
     height: 100vh;
     background: linear-gradient(to top, #ffd1dc, #ffe6eb);
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,14 +31,7 @@
   h1 {
     color: #ff3366;
     font-size: 26px;
-    margin-bottom: 12px;
-  }
-
-  p {
-    color: #555;
-    font-size: 16px;
-    margin-bottom: 28px;
-    line-height: 1.4;
+    margin-bottom: 16px;
   }
 
   .buttons {
@@ -70,12 +63,14 @@
     transform: translateX(-50%);
   }
 
+  /* Floating hearts */
   .heart {
     position: absolute;
     font-size: 22px;
     animation: floatUp 6s infinite;
   }
 
+  /* Balloons */
   .balloon {
     position: absolute;
     bottom: -80px;
@@ -99,6 +94,26 @@
   @keyframes floatUp {
     from { transform: translateY(0); opacity: 1; }
     to { transform: translateY(-120vh); opacity: 0; }
+  }
+
+  /* CONFETTI */
+  .confetti {
+    position: fixed;
+    font-size: 22px;
+    animation: confettiFall 2.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  @keyframes confettiFall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
   }
 </style>
 </head>
@@ -131,15 +146,14 @@
 
 <div class="container">
   <h1>💘 Will you be my Valentine, Naveen? 💘</h1>
-  <p>
-    
+
   <div class="buttons">
     <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
     <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">No 🙃</button>
   </div>
 </div>
 
-<!-- Innerbloom Music -->
+<!-- Music -->
 <audio id="bgMusic" loop>
   <source src="innerbloom.mp3" type="audio/mpeg">
 </audio>
@@ -156,29 +170,35 @@
     noBtn.style.top = Math.random() * maxY + "px";
   }
 
-  function yesClicked() {
-  const music = document.getElementById("bgMusic");
-  music.volume = 0.7;
-  music.play();
+  function launchConfetti() {
+    const emojis = ["🎉","🎊","💖","✨","🥂"];
+    for (let i = 0; i < 40; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      c.style.left = Math.random() * 100 + "vw";
+      c.style.top = "-20px";
+      c.style.animationDuration = (2 + Math.random()) + "s";
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
+    }
+  }
 
-  document.querySelector(".container").innerHTML =`
-      <div style="
-        height:100vh;
-        background:linear-gradient(to top, #ffd1dc, #ffe6eb);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-        padding:20px;
-        font-family:Arial;">
-        <h1 style="color:#ff3366;font-size:22px;line-height:1.4;">
-          💕 I knew you'd click on YES 💕<br><br>
-         Every moment with you feels special…  
-    even ordinary days feel warm and happy 💖  
-  I’d love to celebrate this and every Valentine’s with you. 💖 <br><br>
-          Can't wait to spend time with you handsome 💕
-        </h1>
-      </div>
+  function yesClicked() {
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.7;
+    music.play();
+
+    launchConfetti();
+
+    document.querySelector(".container").innerHTML = `
+      <h1 style="color:#ff3366;font-size:22px;line-height:1.4;">
+        🎉🎊 I knew you'd click on YES 🎊🎉<br><br>
+        Every moment with you feels special…<br>
+        even ordinary days feel warm and happy 💖<br><br>
+        I’d love to celebrate this and every Valentine’s with you 💕<br><br>
+        Can't wait to spend time with you 😘
+      </h1>
     `;
   }
 </script>
