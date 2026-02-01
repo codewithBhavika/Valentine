@@ -6,7 +6,7 @@
 <title>Valentine 💖</title>
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Lobster&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
   body {
@@ -22,46 +22,52 @@
 
   .container {
     text-align: center;
-    padding: 28px;
+    padding: 30px;
     width: 90%;
     max-width: 380px;
     background: rgba(255,255,255,0.95);
-    border-radius: 26px;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    border-radius: 28px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.15);
     position: relative;
     z-index: 5;
   }
 
   img {
-    width: 140px;
-    margin-bottom: 14px;
+    width: 150px;
+    margin: 12px 0;
   }
 
-  /* Pacifico for main headings */
-  h1 {
+  /* First question */
+  .question {
     font-family: 'Pacifico', cursive;
     color: #ff3366;
     font-size: 30px;
-    margin-bottom: 12px;
-    font-weight: 400;
+    margin-bottom: 14px;
   }
 
-  p {
+  /* YES text */
+  .yes-text {
+    font-family: 'Lobster', cursive;
+    font-size: 36px;
     color: #ff3366;
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.5;
+  }
+
+  /* Happy Valentine text */
+  .final-text {
     font-family: 'Pacifico', cursive;
+    font-size: 28px;
+    color: #ff3366;
+    margin-top: 6px;
   }
 
   .buttons {
     position: relative;
-    height: 150px;
-    margin-top: 22px;
+    height: 160px;
+    margin-top: 24px;
   }
 
   button {
-    padding: 14px 28px;
+    padding: 14px 30px;
     font-size: 16px;
     border: none;
     border-radius: 32px;
@@ -84,7 +90,7 @@
     color: #444;
     left: 50%;
     transform: translateX(-50%);
-    top: 80px;
+    top: 90px;
   }
 
   /* Floating hearts */
@@ -107,7 +113,7 @@
     top: 50%;
     left: 50%;
     z-index: 9999;
-    animation: burst 2.8s ease-out forwards;
+    animation: burst 3s ease-out forwards;
   }
 
   @keyframes burst {
@@ -130,7 +136,7 @@
     heart.style.left = Math.random() * 100 + "vw";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
-  }, 500);
+  }, 450);
 </script>
 
 <div class="container" id="card">
@@ -138,7 +144,7 @@
   <!-- FIRST SCREEN -->
   <img src="Bear1.gif" alt="cute bear">
 
-  <h1>Will you be my Valentine, Naveen? 💖</h1>
+  <div class="question">Will you be my Valentine, Naveen? 💖</div>
 
   <div class="buttons">
     <button id="yesBtn" onclick="yesClicked()">Yes 💕</button>
@@ -147,7 +153,6 @@
 
 </div>
 
-<!-- Background Music -->
 <audio id="bgMusic" loop preload="auto" playsinline>
   <source src="innerbloom.mp3" type="audio/mpeg">
 </audio>
@@ -157,7 +162,7 @@
     const noBtn = document.getElementById("noBtn");
     const box = document.querySelector(".buttons");
 
-    const padding = 10;
+    const padding = 20;
     const maxX = box.clientWidth - noBtn.offsetWidth - padding;
     const maxY = box.clientHeight - noBtn.offsetHeight - padding;
 
@@ -168,14 +173,14 @@
 
   function launchConfetti() {
     const colors = ["#ff3366","#ffcc00","#66ccff","#99ffcc","#ff99cc"];
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < 120; i++) {
       const c = document.createElement("div");
       c.className = "confetti";
       c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      c.style.setProperty("--x", (Math.random() * 600 - 300) + "px");
-      c.style.setProperty("--y", (Math.random() * 600 - 300) + "px");
+      c.style.setProperty("--x", (Math.random() * 700 - 350) + "px");
+      c.style.setProperty("--y", (Math.random() * 700 - 350) + "px");
       document.body.appendChild(c);
-      setTimeout(() => c.remove(), 2800);
+      setTimeout(() => c.remove(), 3000);
     }
   }
 
@@ -187,10 +192,10 @@
     launchConfetti();
 
     document.getElementById("card").innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
-        <h1>YES 💖</h1>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div class="yes-text">💖 YES</div>
         <img src="Bear2.gif" alt="happy bear">
-        <p>Happy Valentine’s Day 💕</p>
+        <div class="final-text">Happy Valentine’s Day 💕</div>
       </div>
     `;
   }
