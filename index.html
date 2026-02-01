@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💖</title>
 
-<!-- Cache fix -->
+<!-- Prevent caching -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -26,7 +26,7 @@
     text-align: center;
     padding: 25px;
     width: 90%;
-    background: rgba(255,255,255,0.92);
+    background: rgba(255,255,255,0.95);
     border-radius: 25px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     position: relative;
@@ -101,17 +101,15 @@
     to { transform: translateY(-120vh); opacity: 0; }
   }
 
-  /* CONFETTI PARTICLES */
+  /* CONFETTI BURST */
   .confetti {
     position: fixed;
     width: 8px;
     height: 14px;
-    background-color: red;
     top: 50%;
     left: 50%;
-    opacity: 1;
     z-index: 9999;
-    animation: burst 1.6s ease-out forwards;
+    animation: burst 2.6s ease-out forwards;
   }
 
   @keyframes burst {
@@ -125,7 +123,7 @@
 
 <body>
 
-<!-- Floating Hearts -->
+<!-- Floating hearts -->
 <script>
   setInterval(() => {
     const heart = document.createElement("div");
@@ -141,7 +139,7 @@
 <!-- Balloons -->
 <script>
   for (let i = 0; i < 10; i++) {
-    let b = document.createElement("div");
+    const b = document.createElement("div");
     b.className = "balloon";
     b.style.left = Math.random() * 100 + "vw";
     b.style.animationDelay = Math.random() * 6 + "s";
@@ -150,7 +148,7 @@
 </script>
 
 <div class="container">
-  <h1>💘 Will you be my Valentine, Naveen? 💘</h1>
+  <h1>💘 Will you be my Valentine? 💘</h1>
 
   <div class="buttons">
     <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
@@ -158,8 +156,8 @@
   </div>
 </div>
 
-<!-- Music -->
-<audio id="bgMusic" loop>
+<!-- AUDIO (iOS SAFE) -->
+<audio id="bgMusic" loop preload="auto" playsinline>
   <source src="innerbloom.mp3" type="audio/mpeg">
 </audio>
 
@@ -178,20 +176,19 @@
   function launchConfetti() {
     const colors = ["#ff3366","#ffcc00","#66ccff","#99ffcc","#ff99cc"];
     for (let i = 0; i < 80; i++) {
-      const confetti = document.createElement("div");
-      confetti.className = "confetti";
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      confetti.style.setProperty("--x", (Math.random() * 600 - 300) + "px");
-      confetti.style.setProperty("--y", (Math.random() * 600 - 300) + "px");
-      document.body.appendChild(confetti);
-      setTimeout(() => confetti.remove(), 1600);
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      c.style.setProperty("--x", (Math.random() * 600 - 300) + "px");
+      c.style.setProperty("--y", (Math.random() * 600 - 300) + "px");
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 1600);
     }
   }
 
   function yesClicked() {
     const music = document.getElementById("bgMusic");
     music.volume = 0.7;
-    music.play();
 
     launchConfetti();
 
@@ -201,12 +198,16 @@
         font-size:20px;
         font-style:italic;
         line-height:1.4;">
-        🎉 I knew you'd click on YES 🎉<br><br>
-        With you every moment feels special…<br>
-        even ordinary days feel warm and happy 💖<br><br>
-        I’d love to celebrate this and every Valentine’s with you 💕😘🥰
+        🎉 YES 🎉<br><br>
+        That felt right.<br><br>
+        Happy Valentine’s 💖
       </h1>
     `;
+
+    // iOS-friendly restart AFTER DOM change
+    setTimeout(() => {
+      music.play().catch(() => {});
+    }, 300);
   }
 </script>
 
