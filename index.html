@@ -5,12 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💖</title>
 
-<!-- Cache fix -->
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-
-<!-- Fonts: Lobster + Quicksand -->
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -40,7 +35,7 @@
     font-family: 'Lobster', cursive;
     color: #ff3366;
     font-size: 26px;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     font-weight: 400;
   }
 
@@ -49,6 +44,12 @@
     font-size: 16px;
     line-height: 1.5;
     font-weight: 500;
+    min-height: 40px;
+  }
+
+  img {
+    width: 140px;
+    margin: 10px 0 18px;
   }
 
   .buttons {
@@ -89,27 +90,6 @@
     animation: floatUp 6s infinite;
   }
 
-  /* Balloons */
-  .balloon {
-    position: absolute;
-    bottom: -80px;
-    width: 35px;
-    height: 45px;
-    background: #ff8fab;
-    border-radius: 50%;
-    animation: floatUp 9s infinite;
-  }
-
-  .balloon::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    width: 2px;
-    height: 12px;
-    background: #999;
-  }
-
   @keyframes floatUp {
     from { transform: translateY(0); opacity: 1; }
     to { transform: translateY(-120vh); opacity: 0; }
@@ -137,33 +117,29 @@
 
 <body>
 
-<!-- Hearts & balloons -->
+<!-- Floating hearts -->
 <script>
   setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = Math.random() > 0.5 ? "💖" : "💕";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
-  }, 450);
-
-  for (let i = 0; i < 10; i++) {
-    const b = document.createElement("div");
-    b.className = "balloon";
-    b.style.left = Math.random() * 100 + "vw";
-    b.style.animationDelay = Math.random() * 6 + "s";
-    document.body.appendChild(b);
-  }
+  }, 500);
 </script>
 
-<div class="container">
+<div class="container" id="card">
   <h1>Will you be my Valentine? 💖</h1>
+
+  <!-- FIRST GIF -->
+  <img src="Bear1.gif" alt="cute bear">
+
+  <p id="message">I was hoping you’d say yes 🥺</p>
 
   <div class="buttons">
     <button id="yesBtn" onclick="yesClicked()">Yes 💕</button>
-    <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">No 🙃</button>
+    <button id="noBtn" onclick="noClicked()">No 🙃</button>
   </div>
 </div>
 
@@ -173,11 +149,21 @@
 </audio>
 
 <script>
-  function moveNo() {
-    const noBtn = document.getElementById("noBtn");
-    const container = document.querySelector(".container");
-    noBtn.style.left = Math.random() * (container.offsetWidth - noBtn.offsetWidth) + "px";
-    noBtn.style.top = Math.random() * (container.offsetHeight - noBtn.offsetHeight) + "px";
+  let noCount = 0;
+
+  const noMessages = [
+    "Are you sure? 🥺",
+    "Really sure?? 😟",
+    "This is making me a little sad 💔",
+    "Please don’t say no 😭",
+    "My heart can’t take this 🥹",
+    "Okay… I’ll wait for your yes 💖"
+  ];
+
+  function noClicked() {
+    const msg = document.getElementById("message");
+    msg.innerText = noMessages[Math.min(noCount, noMessages.length - 1)];
+    noCount++;
   }
 
   function launchConfetti() {
@@ -194,22 +180,17 @@
   }
 
   function yesClicked() {
-    const music = document.getElementById("bgMusic");
-    music.volume = 0.7;
-
     launchConfetti();
+    document.getElementById("bgMusic").play();
 
-    document.querySelector(".container").innerHTML = `
-      <h1>💖 Yes 💖</h1>
+    document.getElementById("card").innerHTML = `
+      <h1>💖 YES 💖</h1>
+      <img src="Bear2.gif" alt="happy bear">
       <p>
-        Loving you comes naturally to me.🥰<br><br>
+        Loving you comes naturally to me 🥰<br><br>
         Happy Valentine’s Day 💕
       </p>
     `;
-
-    setTimeout(() => {
-      music.play().catch(() => {});
-    }, 300);
   }
 </script>
 
