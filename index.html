@@ -6,7 +6,7 @@
 <title>Valentine 💖</title>
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
   body {
@@ -37,19 +37,21 @@
     margin-bottom: 14px;
   }
 
+  /* Pacifico for main headings */
   h1 {
-    font-family: 'Lobster', cursive;
+    font-family: 'Pacifico', cursive;
     color: #ff3366;
-    font-size: 26px;
-    margin-bottom: 10px;
+    font-size: 30px;
+    margin-bottom: 12px;
     font-weight: 400;
   }
 
   p {
     color: #ff3366;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 500;
     line-height: 1.5;
+    font-family: 'Pacifico', cursive;
   }
 
   .buttons {
@@ -66,7 +68,7 @@
     cursor: pointer;
     position: absolute;
     font-family: 'Quicksand', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   #yesBtn {
@@ -136,7 +138,7 @@
   <!-- FIRST SCREEN -->
   <img src="Bear1.gif" alt="cute bear">
 
-  <h1>Will you be my Valentine Naveen? 💖</h1>
+  <h1>Will you be my Valentine, Naveen? 💖</h1>
 
   <div class="buttons">
     <button id="yesBtn" onclick="yesClicked()">Yes 💕</button>
@@ -186,7 +188,7 @@
 
     document.getElementById("card").innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
-        <h1>💖 YES 💖</h1>
+        <h1>YES 💖</h1>
         <img src="Bear2.gif" alt="happy bear">
         <p>Happy Valentine’s Day 💕</p>
       </div>
