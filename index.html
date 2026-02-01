@@ -132,10 +132,7 @@
 <div class="container">
   <h1>💘 Will you be my Valentine, Naveen? 💘</h1>
   <p>
-    Every moment with you feels special…  
-    and I’d love to make many more memories together 💕
-  </p>
-
+    
   <div class="buttons">
     <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
     <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">No 🙃</button>
@@ -160,8 +157,11 @@
   }
 
   function yesClicked() {
-    document.getElementById("bgMusic").play();
-    document.body.innerHTML = `
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.7;
+  music.play();
+
+  document.querySelector(".container").innerHTML =`
       <div style="
         height:100vh;
         background:linear-gradient(to top, #ffd1dc, #ffe6eb);
@@ -173,8 +173,9 @@
         font-family:Arial;">
         <h1 style="color:#ff3366;font-size:28px;line-height:1.4;">
           💕 I knew you'd click on YES 💕<br><br>
-          Wow… this is lovely, isn’t it? 💖<br><br>
-          Can't wait to spend time with you 💋
+         Every moment with you feels special…  
+    and I’d love to make many more memories together 💖 <br><br>
+          Can't wait to spend time with you handsome 💕
         </h1>
       </div>
     `;
