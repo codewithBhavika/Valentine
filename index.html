@@ -43,17 +43,10 @@
     font-weight: 400;
   }
 
-  p {
-    color: #ff3366;
-    font-size: 16px;
-    line-height: 1.4;
-    font-weight: 500;
-  }
-
   .buttons {
     position: relative;
     height: 140px;
-    margin-top: 16px;
+    margin-top: 20px;
   }
 
   button {
@@ -135,8 +128,6 @@
 
   <h1>Will you be my Valentine? 💖</h1>
 
-  <p>I was hoping you’d say yes 🥺</p>
-
   <div class="buttons">
     <button id="yesBtn" onclick="yesClicked()">Yes 💕</button>
     <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">No 🙃</button>
@@ -177,10 +168,11 @@
     document.getElementById("bgMusic").play();
 
     document.getElementById("card").innerHTML = `
-      <img src="Bear2.gif" alt="happy bear">
+      
       <h1>YES 💖</h1>
-      <p>
-      <br><br>
+      <p style="color:#ff3366;font-size:16px;font-weight:500;">
+      <img src="Bear2.gif" alt="happy bear">
+        
         Happy Valentine’s Day 💕
       </p>
     `;
